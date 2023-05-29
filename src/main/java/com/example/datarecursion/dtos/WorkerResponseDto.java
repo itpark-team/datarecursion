@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WorkerResponseDto {
+public class WorkerResponseDto implements Serializable {
     private int id;
     private String name;
     private AddressResponseDto address;

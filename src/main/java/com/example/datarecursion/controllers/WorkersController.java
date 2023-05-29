@@ -6,6 +6,7 @@ import com.example.datarecursion.dtos.WorkerResponseDto;
 import com.example.datarecursion.model.Address;
 import com.example.datarecursion.model.Worker;
 import com.example.datarecursion.repository.WorkersRepository;
+import com.example.datarecursion.service.WorkersService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class WorkersController {
 
-    private WorkersRepository workersRepository;
+    private WorkersService workersService;
 
 //    @GetMapping(value = "/get-all")
 //    public List<WorkerResponseDto> getAll() {
@@ -34,24 +35,9 @@ public class WorkersController {
 //        ).collect(Collectors.toList());
 //    }
 
-    private AddressResponseDto addressToDto(Address address) {
-        return AddressResponseDto.builder()
-                .id(address.getId())
-                .street(address.getStreet())
-                .home(address.getHome())
-                .build();
-    }
-
     @GetMapping(value = "/get-all")
     public List<WorkerResponseDto> getAll() {
-        return workersRepository.findAll().stream().map(
-                worker -> WorkerResponseDto
-                        .builder()
-                        .id(worker.getId())
-                        .name(worker.getName())
-                        .address(addressToDto(worker.getAddress()))
-                        .build()
-        ).collect(Collectors.toList());
+        return workersService.getAll();
     }
 
 }
