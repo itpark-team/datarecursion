@@ -40,4 +40,9 @@ public class WorkersController {
         return workersService.getAll();
     }
 
+    @GetMapping(value = "/get-by-id/{id}")
+    public WorkerResponseDto getById(@PathVariable int id) {
+        return workersService.getById(id);
+    }
+
 }
